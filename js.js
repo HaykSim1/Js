@@ -1,9 +1,25 @@
 class Halperclass{
-
-function gets(req, url, asynchronously) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, asynchronously);
+    constructor(url,asynchronously,type){
+      this.url = url;
+      this.asynchronously = asynchronously;
+      this.type = type;
+    }
+    function request() {
+      var xhr = new XMLHttpRequest();
+    xhr.open(this.type, this.url, this.asynchronously);
     xhr.send();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 200){
+          alert("yes");
+        }else {
+          alert("somthing is wrong");
+        }
+    };
+    }
+function gets() {
+  var xhr = new XMLHttpRequest();
+xhr.open('GET', url, asynchronously);
+xhr.send();
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4 && xhr.status == 200){
           alert("yes");
@@ -13,7 +29,7 @@ function gets(req, url, asynchronously) {
     };
   }
 
-  function post(url, data, asynchronously) {
+  function post() {
     var json = JSON.stringify(data);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url, asynchronously);
@@ -28,7 +44,7 @@ function gets(req, url, asynchronously) {
 }
   xhr.send(json);
   }
-  function delete(url,asynchronously) {
+  function delete() {
     var xhr = new XMLHttpRequest();
     xhr.open("DELETE", url, asynchronously);
     xhr.onload = function () {
